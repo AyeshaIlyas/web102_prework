@@ -1,4 +1,14 @@
 // Image credits: Kickstarter
+
+// list of objects, each of which represents a crowdfunded game
+// each game has 6 properties, 3 string values, 3 numbers values
+// the number of objects in the JSON list is 11 
+// uniform format for each object, no missing or optional data
+
+// data scheme, ambiguous properties:
+//  - backers : holds a number referring to the number of unique people who have donated to fund a game
+//  -  pledged : holds a dollar amount referring to the amount of money backers have donated to the game
+
 const games = ` [
   {
     "name": "Heroes Of Mythic Americas",
