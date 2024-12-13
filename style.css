@@ -14,13 +14,19 @@ body {
     background-color: lightblue;
     padding: 1%;
     align-items: center;
-    margin-left: -10px;
+    margin-left: -10px; 
     margin-right: -10px;
     margin-top: -10px;
 }
 
 .stats-container {
     display: flex;
+    align-items: stretch;
+}
+
+.stats-container:hover {
+    cursor: pointer;
+    box-shadow: 0 0 30px lightblue;
 }
 
 .stats-card {
