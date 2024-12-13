@@ -107,3 +107,8 @@ button {
     border-radius: 7px;
 }
 
+@media screen and (max-width: 500px) {
+    .stats-container {
+        flex-wrap: wrap;
+    }
+}
