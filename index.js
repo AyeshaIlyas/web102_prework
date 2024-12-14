@@ -44,6 +44,11 @@ function deleteChildElements(parent) {
 
 // add the specified list of games to the DOM
 function addGamesToPage(games) {
+    if (games.length == 0) {
+        const emptyPara = document.createElement("p");
+        emptyPara.innerHTML = "No games found...";
+        gamesContainer.appendChild(emptyPara);
+    }
 
     // loop over each item in the data
     for (const game of games) {

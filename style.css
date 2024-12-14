@@ -164,6 +164,10 @@ button:hover {
     font-weight: bold;
 }
 
+#games-container {
+    min-height: 500px;
+}
+
 @media screen and (max-width: 500px) {
     .stats-container {
         flex-wrap: wrap;
