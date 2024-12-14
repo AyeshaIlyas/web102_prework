@@ -40,14 +40,44 @@ function addGamesToPage(games) {
         // about each game
         // TIP: if your images are not displaying, make sure there is space
         // between the end of the src attribute and the end of the tag ("/>")
+        // <div style="background-color: red; width: 100%; height: 5px; 
+        // margin: 5px 10px 5px 0; border-radius: 5px">
+        //         <div style="width: 75%;  height: 5px; background-color: blue;"></div>
+        // </div>
+        // rounded to 1 decimal place
+        const fundingPercentage = Math.round((game.pledged / game.goal) * 1000) / 10;
+
+        let color = "";
+        if (fundingPercentage <= 30) {
+            color = "#d91c1c"; // red
+        } else if (fundingPercentage <= 60) {
+            color = "#ffef0a"; // yellow
+        } else if (fundingPercentage <= 100) {
+            color = "#42ad00"; // dark green
+        } else { // over 100%
+            color = "#00ff15"; // bright green
+        }
+
+        console.log(color);
+
         const gameInfo = `
-            <img class="game-img" src=${game.img} />
-            <h3>${game.name}</h3>
-            <p>${game.description}</p>
-            <p>Backers: ${game.backers}</p>
-            <p>Funding status: ${game.pledged}/${game.goal}</p>
+            <div class="game-info">
+                <img class="game-img" src=${game.img} />
+                <h3>${game.name}</h3>
+                <p>${game.description}</p>
+                <p>Backers: ${game.backers}</p>
+            </div>
+            <div class="progress-status">
+                <div class="progress-bar">
+                    <div class="progress-fill" 
+                        style="width: ${fundingPercentage > 100 ? 100 : fundingPercentage}%; 
+                        background-color: ${color}"></div>
+                </div>
+                <div>${fundingPercentage.toFixed(1)}%</div>
+            </div>
         `;
         gameCard.innerHTML = gameInfo;
+        
 
         // append the game to the games-container
         gamesContainer.appendChild(gameCard);

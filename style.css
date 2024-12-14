@@ -82,6 +82,12 @@ body {
 }
 
 .game-card {
+    /* makes sure progress bar is at the bottom of the card 
+    and on the same level on every card */ 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     background-color: #FFFFFF;
     padding: 1%;
     margin: 1%;
@@ -93,6 +99,28 @@ body {
 .game-card:hover {
     cursor: pointer;
     box-shadow: 0 0 30px lightblue;
+}
+
+.progress-status {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    background-color: rgb(205, 205, 205); 
+    width: 100%;
+    height: 7px; 
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.progress-fill {
+    height: 7px;
+    border-radius: 5px;
+    /* width and color set in js */
 }
 
 #button-container {
