@@ -122,6 +122,14 @@ gamesCard.innerHTML = GAMES_JSON.length;
  * Skills used: functions, filter
 */
 
+const filterBtns = document.getElementById("controls-container").querySelectorAll("button");
+
+function removeActive() {
+    for (const btn of filterBtns) {
+        btn.classList.remove("active");
+    }
+}
+
 // global state
 let query = "";
 let filterStatus = "all";
@@ -149,6 +157,11 @@ function displaySearch() {
 // show only games that do not yet have enough funding, that also match search query
 function filterUnfundedOnly() {
     filterStatus = "unfunded";
+
+    // set style of filter to active
+    removeActive();
+    filterBtns[0].classList.add("active");
+
     deleteChildElements(gamesContainer);
     addGamesToPage(search());
 }
@@ -156,14 +169,23 @@ function filterUnfundedOnly() {
 // show only games that are fully funded, that also match search query
 function filterFundedOnly() {
     filterStatus = "funded";
+
+    // set style of filter to active
+    removeActive();
+    filterBtns[1].classList.add("active");
+
     deleteChildElements(gamesContainer);
     addGamesToPage(search());
 }
 
-
 // show all games, that also match search query
 function showAllGames() {
     filterStatus = "all";
+
+    // set style of filter to active
+    removeActive();
+    filterBtns[2].classList.add("active");
+
     deleteChildElements(gamesContainer);
     addGamesToPage(search());
 }

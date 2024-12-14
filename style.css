@@ -127,6 +127,15 @@ body {
     text-align: center;
 }
 
+button {
+    background-color: #a8b0bc;
+    color: black;
+}
+
+button:hover {
+    box-shadow: 0 0 10px lightblue;
+}
+
 #search, button {
     font-family: 'Cabin';
     border: none;
@@ -147,6 +156,12 @@ body {
     border: 2px solid #a8b0bc;
     box-shadow: 0 0 15px lightblue;
     outline: none;
+}
+
+.active {
+    background-color: black;
+    color: #a8b0bc;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 500px) {
