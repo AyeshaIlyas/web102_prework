@@ -122,53 +122,62 @@ gamesCard.innerHTML = GAMES_JSON.length;
  * Skills used: functions, filter
 */
 
+// global state
+let query = "";
+let filterStatus = "all";
 
 // search games by looking for matching substring in name and description
-function search(query) {    
+function search() {  
+    // search for matches based on the filter currently selected
+    // ie, look for matches in set of unfunded games only, funded games only, or all games  
+    let gamesToSearch = GAMES_JSON;
+    if (filterStatus == "unfunded") {
+        gamesToSearch = GAMES_JSON.filter(game => game.pledged < game.goal);;
+    } else if (filterStatus == "funded") {
+        gamesToSearch = GAMES_JSON.filter(game => game.pledged >= game.goal);;
+    }
+    return gamesToSearch.filter(game => game.name.toLowerCase().includes(query) || game.description.toLowerCase().includes(query));
+}
+
+// show games that match the search query
+function displaySearch() {
     deleteChildElements(gamesContainer);
-    query = query.toLowerCase();
-    const matches = GAMES_JSON.filter(game => game.name.toLowerCase().includes(query) || game.description.toLowerCase().includes(query));
+    const matches = search();
     addGamesToPage(matches);
 }
 
-
-// show only games that do not yet have enough funding
+// show only games that do not yet have enough funding, that also match search query
 function filterUnfundedOnly() {
+    filterStatus = "unfunded";
     deleteChildElements(gamesContainer);
-
-    // use filter() to get a list of games that have not yet met their goal
-    let unfunded = GAMES_JSON.filter(game => game.pledged < game.goal);
-
-    // use the function we previously created to add the unfunded games to the DOM
-    addGamesToPage(unfunded);
+    addGamesToPage(search());
 }
 
-// show only games that are fully funded
+// show only games that are fully funded, that also match search query
 function filterFundedOnly() {
+    filterStatus = "funded";
     deleteChildElements(gamesContainer);
-
-    // use filter() to get a list of games that have met or exceeded their goal
-    const funded = GAMES_JSON.filter(game => game.pledged >= game.goal);
-    // use the function we previously created to add unfunded games to the DOM
-    addGamesToPage(funded);
+    addGamesToPage(search());
 }
 
 
-// show all games
+// show all games, that also match search query
 function showAllGames() {
+    filterStatus = "all";
     deleteChildElements(gamesContainer);
-
-    // add all games from the JSON data to the DOM
-    addGamesToPage(GAMES_JSON);
+    addGamesToPage(search());
 }
 
 const searchInput = document.getElementById("search");
-// select each button in the "Our Games" section
 const unfundedBtn = document.getElementById("unfunded-btn");
 const fundedBtn = document.getElementById("funded-btn");
 const allBtn = document.getElementById("all-btn");
 
-searchInput.addEventListener("input", e => search(e.target.value));
+// add event listeners with to control elements
+searchInput.addEventListener("input", e => {
+    query = e.target.value.toLowerCase();
+    displaySearch();
+});
 
 searchInput.addEventListener("keydown", e => {
     if (e.key == "Enter") {
@@ -176,7 +185,6 @@ searchInput.addEventListener("keydown", e => {
     }
 });
 
-// add event listeners with the correct functions to each button
 unfundedBtn.addEventListener("click", e => filterUnfundedOnly());
 fundedBtn.addEventListener("click", e => filterFundedOnly());
 allBtn.addEventListener("click", e => showAllGames());
