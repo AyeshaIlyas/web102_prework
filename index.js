@@ -67,7 +67,7 @@ function addGamesToPage(games) {
             color = "#d91c1c"; // red
         } else if (fundingPercentage <= 60) {
             color = "#ffef0a"; // yellow
-        } else if (fundingPercentage <= 100) {
+        } else { // > 60%
             color = "#42ad00"; // dark green
         }
 
@@ -85,7 +85,7 @@ function addGamesToPage(games) {
                 <div class="progress-status">
                     <div class="progress-bar">
                         <div class="progress-fill" 
-                            style="width: ${fundingPercentage > 100 ? 100 : fundingPercentage}%; 
+                            style="width: ${fundingPercentage}%; 
                             background-color: ${color}"></div>
                     </div>
                     <div>${fundingPercentage.toFixed(1)}%</div>
