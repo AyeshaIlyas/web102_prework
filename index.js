@@ -64,8 +64,6 @@ function addGamesToPage(games) {
             color = "#ffef0a"; // yellow
         } else if (fundingPercentage <= 100) {
             color = "#42ad00"; // dark green
-        } else { // over 100%
-            color = "#00ff15"; // bright green
         }
 
         const gameInfo = `
@@ -75,14 +73,20 @@ function addGamesToPage(games) {
                 <p>${game.description}</p>
                 <p>Backers: ${game.backers}</p>
             </div>
-            <div class="progress-status">
-                <div class="progress-bar">
-                    <div class="progress-fill" 
-                        style="width: ${fundingPercentage > 100 ? 100 : fundingPercentage}%; 
-                        background-color: ${color}"></div>
+            ${ 
+                fundingPercentage >= 100 ?
+                 "<p>⭐ Fully Funded ⭐</p>" : 
+                `
+                <div class="progress-status">
+                    <div class="progress-bar">
+                        <div class="progress-fill" 
+                            style="width: ${fundingPercentage > 100 ? 100 : fundingPercentage}%; 
+                            background-color: ${color}"></div>
+                    </div>
+                    <div>${fundingPercentage.toFixed(1)}%</div>
                 </div>
-                <div>${fundingPercentage.toFixed(1)}%</div>
-            </div>
+                `
+            }
         `;
         gameCard.innerHTML = gameInfo;
         
