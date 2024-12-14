@@ -122,12 +122,23 @@ gamesCard.innerHTML = GAMES_JSON.length;
  * Skills used: functions, filter
 */
 
+
+// search games by looking for matching substring in name and description
+function search(query) {    
+    deleteChildElements(gamesContainer);
+    query = query.toLowerCase();
+    const matches = GAMES_JSON.filter(game => game.name.toLowerCase().includes(query) || game.description.toLowerCase().includes(query));
+    addGamesToPage(matches);
+}
+
+
 // show only games that do not yet have enough funding
 function filterUnfundedOnly() {
     deleteChildElements(gamesContainer);
 
     // use filter() to get a list of games that have not yet met their goal
-    const unfunded = GAMES_JSON.filter(game => game.pledged < game.goal);
+    let unfunded = GAMES_JSON.filter(game => game.pledged < game.goal);
+
     // use the function we previously created to add the unfunded games to the DOM
     addGamesToPage(unfunded);
 }
@@ -151,10 +162,19 @@ function showAllGames() {
     addGamesToPage(GAMES_JSON);
 }
 
+const searchInput = document.getElementById("search");
 // select each button in the "Our Games" section
 const unfundedBtn = document.getElementById("unfunded-btn");
 const fundedBtn = document.getElementById("funded-btn");
 const allBtn = document.getElementById("all-btn");
+
+searchInput.addEventListener("input", e => search(e.target.value));
+
+searchInput.addEventListener("keydown", e => {
+    if (e.key == "Enter") {
+        searchInput.blur(); // remove focus from input 
+    }
+});
 
 // add event listeners with the correct functions to each button
 unfundedBtn.addEventListener("click", e => filterUnfundedOnly());

@@ -123,16 +123,30 @@ body {
     /* width and color set in js */
 }
 
-#button-container {
+#controls-container {
     text-align: center;
 }
 
-button {
+#search, button {
     font-family: 'Cabin';
     border: none;
     padding: 1%;
     margin: 1%;
     border-radius: 7px;
+}
+
+#search {
+    width: 25%;
+    min-width: 200px;
+    max-width: 500px;
+    border: 2px solid rgba(0, 0, 0, 0);
+}
+
+#search:focus {
+    border-radius: 7px;
+    border: 2px solid #a8b0bc;
+    box-shadow: 0 0 15px lightblue;
+    outline: none;
 }
 
 @media screen and (max-width: 500px) {
