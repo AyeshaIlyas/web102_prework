@@ -134,7 +134,7 @@ contributionsCard.innerHTML = `${totalContributors.toLocaleString("en-US")}`;
 
 // calculate and display the funding total
 const totalRaised = GAMES_JSON.reduce((acc, game) => acc + game.pledged, 0);
-raisedCard.innerHTML = `${totalRaised.toLocaleString("en-US")}`;
+raisedCard.innerHTML = `$${totalRaised.toLocaleString("en-US")}`;
 
 // display the number of games 
 gamesCard.innerHTML = GAMES_JSON.length;
